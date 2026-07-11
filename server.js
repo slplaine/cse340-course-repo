@@ -35,6 +35,13 @@ app.get("/projects", (req, res) => {
     res.render("projects", {
         title: "Service Projects"
     });
+
+    
+app.get("/categories", (req, res) => {
+    res.render("categories", {
+        title: "Service Project Categories"
+    });
+
 });
 
 app.listen(PORT, () => {
