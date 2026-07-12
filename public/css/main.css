@@ -30,19 +30,33 @@ header {
    NAVIGATION
 ========================= */
 nav {
+  width: 100%;
+}
+
+nav ul {
   display: flex;
   justify-content: center;
-  gap: 15px;
+  align-items: center;
+  gap: 20px;
+  list-style: none;
   flex-wrap: wrap;
 }
 
+nav li {
+  background: transparent;
+  border: none;
+  padding: 0;
+  margin: 0;
+}
+
 nav a {
+  display: inline-block;
   text-decoration: none;
   color: white;
   background: #2563eb;
   padding: 12px 24px;
   border-radius: 8px;
-  font-weight: 700;
+  font-weight: bold;
   transition: all 0.3s ease;
 }
 
@@ -52,7 +66,7 @@ nav a:hover {
 }
 
 /* =========================
-   MAIN
+   MAIN CONTENT
 ========================= */
 main {
   max-width: 1100px;
@@ -81,14 +95,14 @@ p {
 }
 
 /* =========================
-   LISTA DE CATEGORIAS
+   LISTAS DO CONTEÚDO
 ========================= */
-ul {
+main ul {
   list-style: none;
   margin-top: 20px;
 }
 
-li {
+main li {
   background: #e2e8f0;
   border-left: 6px solid #2563eb;
   padding: 18px;
@@ -98,27 +112,7 @@ li {
 }
 
 /* =========================
-   IMAGENS
-========================= */
-img {
-  max-width: 100%;
-  height: auto;
-  border-radius: 10px;
-}
-
-/* =========================
-   CARDS
-========================= */
-.card {
-  background: #ffffff;
-  border-radius: 10px;
-  padding: 20px;
-  margin-bottom: 20px;
-  box-shadow: 0 3px 10px rgba(0,0,0,.08);
-}
-
-/* =========================
-   LINKS
+   LINKS GERAIS
 ========================= */
 a {
   color: #2563eb;
@@ -126,6 +120,15 @@ a {
 
 a:hover {
   color: #1d4ed8;
+}
+
+/* =========================
+   IMAGENS
+========================= */
+img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 10px;
 }
 
 /* =========================
@@ -144,9 +147,8 @@ footer {
 ========================= */
 @media (max-width: 768px) {
 
-  nav {
+  nav ul {
     flex-direction: column;
-    align-items: center;
   }
 
   nav a {
