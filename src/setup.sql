@@ -47,3 +47,47 @@ VALUES
 ('Urban Garden', 'Creating a community garden', '2026-07-20', 2),
 ('Charity Run', 'Fundraising marathon', '2026-07-25', 3),
 ('Book Drive', 'Collecting books for schools', '2026-07-30', 3);
+
+-- ============================================
+-- Create table: Categories
+-- ============================================
+
+CREATE TABLE categories (
+  category_id SERIAL PRIMARY KEY,
+  name VARCHAR(100) UNIQUE NOT NULL
+);
+
+-- ============================================
+-- Create table: Project-Categories relationships
+-- ============================================
+
+CREATE TABLE project_categories (
+  project_id INT REFERENCES projects(project_id) ON DELETE CASCADE,
+  category_id INT REFERENCES categories(category_id) ON DELETE CASCADE,
+  PRIMARY KEY (project_id, category_id)
+);
+
+-- ============================================
+-- Insert sample data: Categories
+-- ============================================
+
+INSERT INTO categories (name)
+VALUES
+('Environmental'),
+('Educational'),
+('Community Service'),
+('Health and Wellness');
+
+-- ============================================
+-- Insert sample data: Project-Categories relationships
+-- ============================================
+
+INSERT INTO project_categories (project_id, category_id)
+VALUES
+(1, 1), -- Projeto 1 -> Environmental
+(2, 2), -- Projeto 2 -> Educational
+(3, 1), -- Projeto 3 -> Environmental
+(4, 2), -- Projeto 4 -> Educational
+(5, 3), -- Projeto 5 -> Community Service
+(6, 4), -- Projeto 6 -> Health and Wellness
+(7, 2); -- Projeto 7 -> Educational

@@ -4,6 +4,7 @@ import { fileURLToPath } from "url";
 import { testConnection } from './src/models/db.js';
 import { getAllOrganizations } from './src/models/organizations.js';
 import { getAllProjects } from './src/models/projects.js';
+import { getAllCategories } from './src/models/categories.js';
 
 const NODE_ENV = process.env.NODE_ENV?.toLowerCase() || "production";
 const PORT = process.env.PORT || 3000;
@@ -39,9 +40,17 @@ app.get("/projects", async (req, res) => {
   res.render("projects", { title, projects });
 });
 
-app.get("/categories", (req, res) => {
-  res.render("categories", { title: "Service Project Categories" });
+app.get("/categories", async (req, res) => {
+  try {
+    const categories = await getAllCategories();
+    const title = "Service Project Categories";
+    res.render("categories", { title, categories });
+  } catch (err) {
+    console.error(err);
+    res.status(500).send("Erro ao carregar categorias");
+  }
 });
+
 
 // Inicializa servidor
 app.listen(PORT, async () => {
