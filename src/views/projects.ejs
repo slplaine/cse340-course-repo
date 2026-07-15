@@ -1,18 +1,18 @@
 <%- include("partials/header") %>
 
 <main>
+  <h1><%= title %></h1>
+  <p>Current Service Projects</p>
 
-<h1><%= title %></h1>
-
-<p>Current Service Projects</p>
-
-<ul>
-    <li>Community Food Drive</li>
-    <li>Neighborhood Cleanup</li>
-    <li>Park Restoration</li>
-    <li>School Supply Donation</li>
-</ul>
-
+  <ul>
+    <% projects.forEach(project => { %>
+      <li>
+        <strong><%= project.title %></strong>  
+        - <%= project.organization_name %>  
+        - <%= new Date(project.date).toLocaleDateString() %>
+      </li>
+    <% }) %>
+  </ul>
 </main>
 
 <%- include("partials/footer") %>
