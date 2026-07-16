@@ -29,24 +29,26 @@ CREATE TABLE projects (
     project_id SERIAL PRIMARY KEY,
     title VARCHAR(150) NOT NULL,
     description TEXT,
+    location VARCHAR(150) NOT NULL,
     date DATE NOT NULL,
     organization_id INTEGER NOT NULL,
-    CONSTRAINT fk_org FOREIGN KEY (organization_id) REFERENCES organization(organization_id)
+    CONSTRAINT fk_org FOREIGN KEY (organization_id)
+        REFERENCES organization(organization_id)
 );
 
 -- ============================================
 -- Insert sample data: Projects
 -- ============================================
 
-INSERT INTO projects (title, description, date, organization_id)
+INSERT INTO projects (title, description, location, date, organization_id)
 VALUES
-('Community Cleanup', 'Neighborhood cleaning initiative', '2026-07-01', 1),
-('Food Drive', 'Collecting food for families', '2026-07-05', 1),
-('Tree Planting', 'Environmental project', '2026-07-10', 1),
-('Recycling Workshop', 'Educational event on recycling', '2026-07-15', 2),
-('Urban Garden', 'Creating a community garden', '2026-07-20', 2),
-('Charity Run', 'Fundraising marathon', '2026-07-25', 3),
-('Book Drive', 'Collecting books for schools', '2026-07-30', 3);
+('Community Cleanup', 'Neighborhood cleaning initiative', 'Downtown Park', '2026-07-01', 1),
+('Food Drive', 'Collecting food for families', 'Community Center', '2026-07-05', 1),
+('Tree Planting', 'Environmental project', 'Riverside Area', '2026-07-10', 1),
+('Recycling Workshop', 'Educational event on recycling', 'City Library', '2026-07-15', 2),
+('Urban Garden', 'Creating a community garden', 'Westside Neighborhood', '2026-07-20', 2),
+('Charity Run', 'Fundraising marathon', 'Main Avenue', '2026-07-25', 3),
+('Book Drive', 'Collecting books for schools', 'Public School District', '2026-07-30', 3);
 
 -- ============================================
 -- Create table: Categories
