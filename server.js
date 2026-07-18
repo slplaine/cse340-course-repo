@@ -1,12 +1,14 @@
 import express from "express";
 import path from "path";
 import { fileURLToPath } from "url";
-import { testConnection } from './src/models/db.js';
-import { getAllOrganizations } from './src/models/organizations.js';
-import { getAllProjects } from './src/models/projects.js';
-import { getAllCategories } from './src/models/categories.js';
 
+import { testConnection } from "./src/models/db.js";
+import router from "./src/routes.js";
+
+// Define the application environment
 const NODE_ENV = process.env.NODE_ENV?.toLowerCase() || "production";
+
+// Define the port number the server will listen on
 const PORT = process.env.PORT || 3000;
 
 const __filename = fileURLToPath(import.meta.url);
@@ -21,6 +23,7 @@ app.use(express.static(path.join(__dirname, "public")));
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "src", "views"));
 
+console.log("I'm running the new server.");
 
 // Middleware to log all requests
 app.use((req, res, next) => {
@@ -37,73 +40,38 @@ app.use((req, res, next) => {
   next();
 });
 
-
-
-console.log("I'm running the new server.");
-
-// Rotas
-app.get("/", (req, res) => {
-  res.render("home", { title: "Home" });
-});
-
-app.get("/organizations", async (req, res) => {
-  const organizations = await getAllOrganizations();
-  const title = "Our Partner Organizations";
-  res.render("organizations", { title, organizations });
-});
-
-app.get("/projects", async (req, res) => {
-  const projects = await getAllProjects();
-  const title = "Service Projects";
-  res.render("projects", { title, projects });
-});
-
-app.get("/categories", async (req, res) => {
-  try {
-    const categories = await getAllCategories();
-    const title = "Service Project Categories";
-    res.render("categories", { title, categories });
-  } catch (err) {
-    console.error(err);
-    res.status(500).send("Erro ao carregar categorias");
-  }
-});
-// Test route for 500 errors
-app.get('/test-error', (req, res, next) => {
-    const err = new Error('This is a test error');
-    err.status = 500;
-    next(err);
-});
+// Use the imported router to handle routes
+app.use(router);
 
 // Catch-all route for 404 errors
 app.use((req, res, next) => {
-    const err = new Error("Page Not Found");
-    err.status = 404;
-    next(err);
+  const err = new Error("Page Not Found");
+  err.status = 404;
+  next(err);
 });
 
 // Global error handler
 app.use((err, req, res, next) => {
-    // Log error details for debugging
-    console.error('Error occurred:', err.message);
-    console.error('Stack trace:', err.stack);
-    
-    // Determine status and template
-    const status = err.status || 500;
-    const template = status === 404 ? '404' : '500';
-    
-    // Prepare data for the template
-    const context = {
-        title: status === 404 ? 'Page Not Found' : 'Server Error',
-        error: err.message,
-        stack: err.stack
-    };
-    
-    // Render the appropriate error template
-    res.status(status).render(`errors/${template}`, context);
+  // Log error details for debugging
+  console.error("Error occurred:", err.message);
+  console.error("Stack trace:", err.stack);
+
+  // Determine status and template
+  const status = err.status || 500;
+  const template = status === 404 ? "404" : "500";
+
+  // Prepare data for the template
+  const context = {
+    title: status === 404 ? "Page Not Found" : "Server Error",
+    error: err.message,
+    stack: err.stack
+  };
+
+  // Render the appropriate error template
+  res.status(status).render(`errors/${template}`, context);
 });
 
-// Initializes the server
+// Initialize the server
 app.listen(PORT, async () => {
   try {
     await testConnection();
@@ -113,5 +81,3 @@ app.listen(PORT, async () => {
     console.error("Error connecting to the database:", error);
   }
 });
-
-
