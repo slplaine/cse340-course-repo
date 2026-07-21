@@ -7,8 +7,12 @@
   <ul>
     <% projects.forEach(project => { %>
       <li>
-        <strong><%= project.title %></strong>  
-        - <%= project.organization_name %>
+        - <a href="/project/<%= project.project_id %>">
+            <strong><%= project.title %></strong>
+          </a>
+        - <a href="/organization/<%= project.organization_id %>">
+            <strong><%= project.organization_name %></strong>
+          </a>
         - <%= project.location %>  
         - <%= new Date(project.date).toLocaleDateString() %>
       </li>
