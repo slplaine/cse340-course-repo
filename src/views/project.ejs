@@ -3,7 +3,10 @@
 <main>
     <h1><%= project.title %></h1>
 
-    <p><strong>Description:</strong> <%= project.description %></p>
+    <p>
+        <strong>Description:</strong>
+        <%= project.description %>
+    </p>
 
     <p>
         <strong>Date:</strong>
@@ -15,15 +18,25 @@
         <%= project.location %>
     </p>
 
-   
     <p>
         <strong>Organization:</strong>
 
         <a href="/organization/<%= project.organization_id %>">
-        <%= project.organization_name %>
+            <%= project.organization_name %>
         </a>
     </p>
 
+    <h2>Categories</h2>
+
+    <ul>
+        <% categories.forEach(category => { %>
+            <li>
+                <a href="/category/<%= category.category_id %>">
+                    <%= category.name %>
+                </a>
+            </li>
+        <% }) %>
+    </ul>
 </main>
 
 <%- include("partials/footer") %>
