@@ -9,7 +9,7 @@ const showProjectsPage = async (req, res) => {
     const projects = await getUpcomingProjects(NUMBER_OF_UPCOMING_PROJECTS);
     const title = 'Upcoming Service Projects';
 
-    res.render('projects', { title: project.title, title, projects });
+    res.render('projects', {title, projects });
 };
 
 const showProjectDetailsPage = async (req, res) => {
@@ -18,7 +18,7 @@ const showProjectDetailsPage = async (req, res) => {
   const project = await getProjectDetails(id);
   const categories = await getCategoriesByProjectId(id);
 
-  res.render('project', { project, categories });
+  res.render('project', { title: project.title, project, categories });
 };
 
 // Export any controller functions
