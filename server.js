@@ -1,3 +1,4 @@
+import flash from './src/middleware/flash.js';
 import session from 'express-session';
 import express from "express";
 import path from "path";
@@ -39,6 +40,8 @@ app.use(session({
     saveUninitialized: true,
     cookie: { maxAge: 60 * 60 * 1000 } // Session expires after 1 hour of inactivity
 }));
+// Use flash message middleware
+app.use(flash);
 
 // Middleware to log all requests
 app.use((req, res, next) => {
@@ -48,6 +51,7 @@ app.use((req, res, next) => {
 
   next();
 });
+
 
 // Middleware to make NODE_ENV available to all templates
 app.use((req, res, next) => {
