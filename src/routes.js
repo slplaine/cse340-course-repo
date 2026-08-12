@@ -7,7 +7,12 @@ import {
     showEditOrganizationForm,
     processEditOrganizationForm
 } from './controllers/organizations.js';
-import { showProjectDetailsPage } from './controllers/projects.js';
+import { 
+    showProjectDetailsPage, 
+    showProjectDetailsPage,
+    showNewProjectForm,
+    processNewProjectForm 
+} from './controllers/projects.js';
 import {showCategoryDetailsPage} from './controllers/categories.js';
 
 import { showHomePage } from './controllers/index.js';
