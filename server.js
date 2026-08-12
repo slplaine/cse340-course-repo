@@ -1,3 +1,4 @@
+import session from 'express-session';
 import express from "express";
 import path from "path";
 import { fileURLToPath } from "url";
@@ -16,6 +17,8 @@ const __dirname = path.dirname(__filename);
 
 const app = express();
 
+const SESSION_SECRET = process.env.SESSION_SECRET;
+
 // Allow Express to receive and process common POST data
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
@@ -28,6 +31,14 @@ app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "src", "views"));
 
 console.log("I'm running the new server.");
+
+// Set up session management
+app.use(session({
+    secret: SESSION_SECRET,
+    resave: false,
+    saveUninitialized: true,
+    cookie: { maxAge: 60 * 60 * 1000 } // Session expires after 1 hour of inactivity
+}));
 
 // Middleware to log all requests
 app.use((req, res, next) => {
