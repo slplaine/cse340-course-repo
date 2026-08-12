@@ -80,18 +80,6 @@ const processEditOrganizationForm = async (req, res) => {
     const organizationId = req.params.id;
     const { name, description, contactEmail, logoFilename } = req.body;
 
-    await updateOrganization(organizationId, name, description, contactEmail, logoFilename);
-    
-    // Set a success flash message
-    req.flash('success', 'Organization updated successfully!');
-
-    res.redirect(`/organization/${organizationId}`);
-    
-};
-const processEditOrganizationForm = async (req, res) => {
-    const organizationId = req.params.id;
-    const { name, description, contactEmail, logoFilename } = req.body;
-
     // 1. Check for validation errors
     const results = validationResult(req);
     if (!results.isEmpty()) {
