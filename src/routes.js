@@ -10,7 +10,8 @@ import {
 import { 
     showProjectDetailsPage,
     showNewProjectForm,
-    processNewProjectForm 
+    processNewProjectForm,
+    projectValidation
 } from './controllers/projects.js';
 import {showCategoryDetailsPage} from './controllers/categories.js';
 
@@ -46,7 +47,7 @@ router.post('/new-organization', organizationValidation, processNewOrganizationF
 // Route to handle the edit organization form submission
 router.post('/edit-organization/:id', organizationValidation, processEditOrganizationForm);
 // Route to handle new project form submission
-router.post('/new-project', processNewProjectForm);
+router.post('/new-project',projectValidation, processNewProjectForm);
 
 // error-handling routes
 router.get('/test-error', testErrorPage);
