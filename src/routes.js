@@ -8,7 +8,6 @@ import {
     processEditOrganizationForm
 } from './controllers/organizations.js';
 import { 
-    showProjectDetailsPage, 
     showProjectDetailsPage,
     showNewProjectForm,
     processNewProjectForm 
