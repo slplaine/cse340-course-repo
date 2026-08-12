@@ -1,3 +1,4 @@
+import { body, validationResult } from 'express-validator';
 import { getUpcomingProjects,getProjectDetails} from '../models/projects.js';
 import { getCategoriesByProjectId } from '../models/categories.js';
 
