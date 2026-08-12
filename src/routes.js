@@ -1,7 +1,10 @@
 import express from 'express';
-import { processNewOrganizationForm } from './controllers/organizations.js';
-import { showNewOrganizationForm } from './controllers/organizations.js';
-import { showOrganizationDetailsPage } from './controllers/organizations.js';
+import {
+    showOrganizationDetailsPage,
+    showNewOrganizationForm,
+    processNewOrganizationForm,
+    organizationValidation
+} from './controllers/organizations.js';
 import { showProjectDetailsPage } from './controllers/projects.js';
 import {showCategoryDetailsPage} from './controllers/categories.js';
 
@@ -29,7 +32,7 @@ router.get('/category/:id', showCategoryDetailsPage);
 router.get('/new-organization', showNewOrganizationForm);
 
 // Route to handle new organization form submission
-router.post('/new-organization', processNewOrganizationForm);
+router.post('/new-organization', organizationValidation, processNewOrganizationForm);
 
 // error-handling routes
 router.get('/test-error', testErrorPage);
