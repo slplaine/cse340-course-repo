@@ -86,7 +86,31 @@ const processEditOrganizationForm = async (req, res) => {
     req.flash('success', 'Organization updated successfully!');
 
     res.redirect(`/organization/${organizationId}`);
+    
 };
+const processEditOrganizationForm = async (req, res) => {
+    const organizationId = req.params.id;
+    const { name, description, contactEmail, logoFilename } = req.body;
+
+    // 1. Check for validation errors
+    const results = validationResult(req);
+    if (!results.isEmpty()) {
+        results.array().forEach((error) => {
+            req.flash('error', error.msg);
+        });
+        return res.redirect('/edit-organization/' + organizationId);
+    }
+
+    // 2. Update organization if no validation errors
+    await updateOrganization(organizationId, name, description, contactEmail, logoFilename);
+    
+    // 3. Success message
+    req.flash('success', 'Organization updated successfully!');
+
+    // 4. Redirect to the organization page
+    res.redirect(`/organization/${organizationId}`);
+};
+
 // Export any controller functions
 export { 
     showOrganizationsPage, 
