@@ -55,4 +55,9 @@ const processAssignCategoriesForm = async (req, res) => {
     res.redirect(`/project/${projectId}`);
 };
 // Export any controller functions
-export { showCategoriesPage, showCategoryDetailsPage, showAssignCategoriesForm, processAssignCategoriesForm  };
+export { 
+  showCategoriesPage, 
+  showCategoryDetailsPage, 
+  showAssignCategoriesForm, 
+  processAssignCategoriesForm  
+};
