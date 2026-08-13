@@ -107,7 +107,7 @@ const updateProject = async (
     organizationId
 ) => {
     const query = `
-        UPDATE project
+        UPDATE projects
         SET title = $1,
             description = $2,
             location = $3,
