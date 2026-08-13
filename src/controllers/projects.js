@@ -1,7 +1,12 @@
 import { body, validationResult } from 'express-validator';
-import { getUpcomingProjects,getProjectDetails} from '../models/projects.js';
+import { 
+  getAllProjects,
+  createProject,
+  getUpcomingProjects,
+  getProjectDetails,
+  updateProject
+} from '../models/projects.js';
 import { getCategoriesByProjectId } from '../models/categories.js';
-import { createProject } from '../models/projects.js';
 import { getAllOrganizations } from '../models/organizations.js';
 
 const projectValidation = [
@@ -24,7 +29,7 @@ const projectValidation = [
         .notEmpty().withMessage('Organization is required')
         .isInt().withMessage('Organization must be a valid integer')
 ];
-const NUMBER_OF_UPCOMING_PROJECTS = 5
+const NUMBER_OF_UPCOMING_PROJECTS = 5;
 
 // Define any controller functions
 const showProjectsPage = async (req, res) => {
@@ -76,12 +81,51 @@ const processNewProjectForm = async (req, res) => {
         res.redirect('/new-project');
     }
 }
+const showEditProjectForm = async (req, res) => {
+    const projectId = req.params.id;
 
+    const project = await getProjectDetails(projectId);
+    const organizations = await getAllOrganizations();
+
+    const title = 'Edit Project';
+
+    res.render('edit-project', {
+        title,
+        project,
+        organizations
+    });
+};
+const processEditProjectForm = async (req, res) => {
+    const projectId = req.params.id;
+
+    const {
+        title,
+        description,
+        location,
+        date,
+        organizationId
+    } = req.body;
+
+    await updateProject(
+        projectId,
+        title,
+        description,
+        location,
+        date,
+        organizationId
+    );
+
+    req.flash('success', 'Project updated successfully!');
+
+    res.redirect(`/project/${projectId}`);
+};
 // Export any controller functions
 export {
   showProjectsPage,
   showProjectDetailsPage,
   showNewProjectForm,
   processNewProjectForm,
+  showEditProjectForm,
+  processEditProjectForm,
   projectValidation
 };
