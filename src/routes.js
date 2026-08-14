@@ -34,8 +34,8 @@ import {
     showLoginForm,
     processLoginForm,
     processLogout,
-    showDashboard,
-    requireLogin
+    requireLogin,
+    showDashboard
 } from './controllers/users.js'; 
 import { showHomePage } from './controllers/index.js';
 import { testErrorPage } from './controllers/errors.js';
