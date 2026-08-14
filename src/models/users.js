@@ -67,4 +67,6 @@ const authenticateUser = async (email, password) => {
     return user;
 };
 
-export { createUser, findUserByEmail, verifyPassword, authenticateUser };
+export { 
+    createUser, 
+    authenticateUser };
