@@ -30,7 +30,10 @@ import {
 } from './controllers/categories.js';
 import { 
     showUserRegistrationForm, 
-    processUserRegistrationForm 
+    processUserRegistrationForm,
+    showLoginForm,
+    processLoginForm,
+    processLogout
 } from './controllers/users.js'; 
 import { showHomePage } from './controllers/index.js';
 import { testErrorPage } from './controllers/errors.js';
