@@ -69,6 +69,27 @@ const authenticateUser = async (email, password) => {
     return user;
 };
 
+const getAllUsers = async () => {
+    const query = `
+        SELECT 
+            u.user_id, 
+            u.name, 
+            u.email, 
+            r.role_name AS role
+        FROM users u
+        INNER JOIN roles r ON u.role_id = r.role_id
+        ORDER BY u.name ASC
+    `;
+
+    try {
+        const result = await db.query(query);
+        return result.rows;
+    } catch (error) {
+        console.error('Error fetching all users:', error);
+        throw new Error('Failed to retrieve users');
+    }
+};
 export { 
     createUser, 
-    authenticateUser };
+    authenticateUser,
+    getAllUsers };

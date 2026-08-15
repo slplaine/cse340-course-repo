@@ -36,7 +36,8 @@ import {
     processLogout,
     requireLogin,
     showDashboard,
-    requireRole
+    requireRole,
+    buildUserList
 } from './controllers/users.js'; 
 import { showHomePage } from './controllers/index.js';
 import { testErrorPage } from './controllers/errors.js';
@@ -93,7 +94,8 @@ router.post('/login', processLoginForm);
 router.get('/logout', processLogout);
 // Protected dashboard route
 router.get('/dashboard', requireLogin, showDashboard);
-
+// Protected admin route
+router.get('/users',requireLogin,requireRole('admin'),buildUserList);
 
 // error-handling routes
 router.get('/test-error', testErrorPage);

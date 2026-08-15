@@ -1,0 +1,37 @@
+<%- include('partials/header') %>
+
+<main>
+    <h1><%= title %></h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>User ID</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Role</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            <% users.forEach(user => { %>
+                <tr>
+                    <td><%= user.user_id %></td>
+                    <td><%= user.name %></td>
+                    <td><%= user.email %></td>
+                    <td><%= user.role %></td>
+                </tr>
+            <% }) %>
+        </tbody>
+    </table>
+
+    <% if (messages && messages.length > 0) { %>
+        <ul class="messages">
+            <% messages.forEach(message => { %>
+                <li><%= message %></li>
+            <% }) %>
+        </ul>
+    <% } %>
+</main>
+
+<%- include('partials/footer') %>
